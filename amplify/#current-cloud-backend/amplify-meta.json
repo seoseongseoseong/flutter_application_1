@@ -1,0 +1,59 @@
+{
+  "providers": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-flutterapplication1-dev-554e1-authRole",
+      "UnauthRoleArn": "arn:aws:iam::975049895124:role/amplify-flutterapplication1-dev-554e1-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::975049895124:role/amplify-flutterapplication1-dev-554e1-authRole",
+      "Region": "ap-northeast-2",
+      "DeploymentBucketName": "amplify-flutterapplication1-dev-554e1-deployment",
+      "UnauthRoleName": "amplify-flutterapplication1-dev-554e1-unauthRole",
+      "StackName": "amplify-flutterapplication1-dev-554e1",
+      "StackId": "arn:aws:cloudformation:ap-northeast-2:975049895124:stack/amplify-flutterapplication1-dev-554e1/d09626f0-4be5-11ef-b7d1-024bea27a70b",
+      "AmplifyAppId": "dzxki1ii59wlm"
+    }
+  },
+  "auth": {
+    "flutterapplication1b3cbd9f9": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false,
+      "frontendAuthConfig": {
+        "socialProviders": [],
+        "usernameAttributes": [
+          "PHONE_NUMBER"
+        ],
+        "signupAttributes": [
+          "EMAIL"
+        ],
+        "passwordProtectionSettings": {
+          "passwordPolicyMinLength": 8,
+          "passwordPolicyCharacters": []
+        },
+        "mfaConfiguration": "OFF",
+        "mfaTypes": [
+          "SMS"
+        ],
+        "verificationMechanisms": [
+          "EMAIL"
+        ]
+      },
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-flutterapplication1-dev-554e1-deployment/amplify-cfn-templates/auth/flutterapplication1b3cbd9f9-cloudformation-template.json",
+        "logicalId": "authflutterapplication1b3cbd9f9"
+      },
+      "lastPushTimeStamp": "2024-07-27T07:05:29.386Z",
+      "output": {
+        "CreatedSNSRole": "arn:aws:iam::975049895124:role/snsb3cbd9f9554e1-dev",
+        "UserPoolId": "ap-northeast-2_3yFAGywA2",
+        "AppClientIDWeb": "4r44hvb8o83k8pk1llhqdgkapf",
+        "AppClientID": "7v5to5ubtn026dilb49ooocdm6",
+        "IdentityPoolId": "ap-northeast-2:da9afd48-b234-4a97-9971-46c4c59e3a06",
+        "UserPoolArn": "arn:aws:cognito-idp:ap-northeast-2:975049895124:userpool/ap-northeast-2_3yFAGywA2",
+        "IdentityPoolName": "flutterapplication1b3cbd9f9_identitypool_b3cbd9f9__dev",
+        "UserPoolName": "flutterapplication1b3cbd9f9_userpool_b3cbd9f9"
+      },
+      "lastPushDirHash": "qgvaIFgj3wiDdksNtVX5Mxy6HnM="
+    }
+  }
+}
