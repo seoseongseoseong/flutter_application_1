@@ -9,7 +9,7 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  final _emailController = TextEditingController();
+  final _phoneController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmationCodeController = TextEditingController();
   bool _isConfirmationCodeSent = false;
@@ -17,11 +17,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Future<void> _register() async {
     try {
       await Amplify.Auth.signUp(
-        username: _emailController.text.trim(),
+        username: _phoneController.text.trim(),
         password: _passwordController.text.trim(),
         options: SignUpOptions(
           userAttributes: {
-            CognitoUserAttributeKey.email: _emailController.text.trim(),
+            CognitoUserAttributeKey.phoneNumber: _phoneController.text.trim(),
           },
         ),
       );
@@ -37,7 +37,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Future<void> _confirmSignUp() async {
     try {
       await Amplify.Auth.confirmSignUp(
-        username: _emailController.text.trim(),
+        username: _phoneController.text.trim(),
         confirmationCode: _confirmationCodeController.text.trim(),
       );
       Fluttertoast.showToast(msg: 'Registration confirmed');
@@ -58,8 +58,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
         child: Column(
           children: [
             TextField(
-              controller: _emailController,
-              decoration: InputDecoration(labelText: 'Email'),
+              controller: _phoneController,
+              decoration: InputDecoration(labelText: 'Phone Number'),
               keyboardType: TextInputType.emailAddress,
             ),
             SizedBox(height: 16.0),
@@ -92,3 +92,4 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
   }
 }
+

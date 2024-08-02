@@ -10,13 +10,13 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final _emailController = TextEditingController();
+  final _phoneController = TextEditingController();
   final _passwordController = TextEditingController();
 
   Future<void> _login() async {
     try {
       SignInResult result = await Amplify.Auth.signIn(
-        username: _emailController.text.trim(),
+        username: _phoneController.text.trim(),
         password: _passwordController.text.trim(),
       );
       if (result.isSignedIn) {
@@ -41,9 +41,9 @@ class _LoginScreenState extends State<LoginScreen> {
         child: Column(
           children: [
             TextField(
-              controller: _emailController,
-              decoration: const InputDecoration(labelText: 'Email'),
-              keyboardType: TextInputType.emailAddress,
+              controller: _phoneController,
+              decoration: const InputDecoration(labelText: 'Phone Number'),
+              keyboardType: TextInputType.phone,
             ),
             const SizedBox(height: 16.0),
             TextField(

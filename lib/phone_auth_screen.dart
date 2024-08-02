@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class PhoneAuthScreen extends StatefulWidget {
   const PhoneAuthScreen({super.key});
@@ -13,20 +14,22 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
   final TextEditingController _codeController = TextEditingController();
   final FirebaseAuth _auth = FirebaseAuth.instance;
   String? _verificationId;
+  bool _isCodeSent = false;
 
   void _verifyPhoneNumber() async {
     await _auth.verifyPhoneNumber(
       phoneNumber: _phoneController.text,
       verificationCompleted: (PhoneAuthCredential credential) async {
         await _auth.signInWithCredential(credential);
-        print("Phone number automatically verified and user signed in: ${_auth.currentUser}");
+        Fluttertoast.showToast(msg: "Phone number automatically verified and user signed in: ${_auth.currentUser}");
       },
       verificationFailed: (FirebaseAuthException e) {
-        print("Phone number verification failed. Code: ${e.code}. Message: ${e.message}");
+        Fluttertoast.showToast(msg: "Phone number verification failed. Code: ${e.code}. Message: ${e.message}");
       },
-      codeSent:Map.fromEntries(entries) (String verificationId, int? resendToken) {
+      codeSent: (String verificationId, int? resendToken) {
         setState(() {
           _verificationId = verificationId;
+          _isCodeSent = true;
         });
       },
       codeAutoRetrievalTimeout: (String verificationId) {
@@ -45,9 +48,9 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
 
     try {
       final UserCredential userCredential = await _auth.signInWithCredential(credential);
-      print("Successfully signed in UID: ${userCredential.user!.uid}");
+      Fluttertoast.showToast(msg: "Successfully signed in UID: ${userCredential.user!.uid}");
     } catch (e) {
-      print("Failed to sign in: $e");
+      Fluttertoast.showToast(msg: "Failed to sign in: $e");
     }
   }
 
@@ -75,20 +78,22 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
               onPressed: _verifyPhoneNumber,
               child: const Text('Verify Phone Number'),
             ),
-            const SizedBox(height: 16.0),
-            TextField(
-              controller: _codeController,
-              decoration: const InputDecoration(
-                labelText: 'Verification code',
-                border: OutlineInputBorder(),
+            if (_isCodeSent) ...[
+              const SizedBox(height: 16.0),
+              TextField(
+                controller: _codeController,
+                decoration: const InputDecoration(
+                  labelText: 'Verification code',
+                  border: OutlineInputBorder(),
+                ),
+                keyboardType: TextInputType.number,
               ),
-              keyboardType: TextInputType.number,
-            ),
-            const SizedBox(height: 16.0),
-            ElevatedButton(
-              onPressed: _signInWithPhoneNumber,
-              child: const Text('Sign In'),
-            ),
+              const SizedBox(height: 16.0),
+              ElevatedButton(
+                onPressed: _signInWithPhoneNumber,
+                child: const Text('Sign In'),
+              ),
+            ],
           ],
         ),
       ),
