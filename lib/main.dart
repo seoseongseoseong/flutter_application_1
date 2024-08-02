@@ -13,10 +13,9 @@ void main() async {
 }
 
 Future<void> _configureAmplify() async {
-  final authPlugin = AmplifyAuthCognito();
-  await Amplify.addPlugin(authPlugin);
-
+  final AmplifyAuthCognito authPlugin = AmplifyAuthCognito();
   try {
+    await Amplify.addPlugin(authPlugin);
     await Amplify.configure(amplifyconfig);
     print('Amplify configured successfully');
   } catch (e) {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:amplify_flutter/amplify_flutter.dart';
+import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -18,9 +19,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
       await Amplify.Auth.signUp(
         username: _emailController.text.trim(),
         password: _passwordController.text.trim(),
-        options: CognitoSignUpOptions(
+        options: SignUpOptions(
           userAttributes: {
-            'email': _emailController.text.trim(),
+            CognitoUserAttributeKey.email: _emailController.text.trim(),
           },
         ),
       );
